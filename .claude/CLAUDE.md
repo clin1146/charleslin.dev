@@ -17,18 +17,38 @@ Plain HTML — no framework, no build step, no dependencies. Deploys are instant
 - If adding a build step: Jekyll works natively on GitHub Pages. Anything else (Astro, Hugo, Eleventy) needs a GitHub Actions workflow.
 - **Given deadlines, stay with plain HTML unless there's a strong reason.**
 
-## Style / tone
-Dark `#0d0d0f` background, gold `#c9a227` accent — matches physical PCB (black soldermask, ENIG gold).
-Connect 4 motif: four filled gold discs + three empty. Written for engineers handed a physical card. Understated, technical, no marketing language.
+## Current design (as of 2026-09-06)
+- **Color scheme:** Illini Blue `#13294B` background, `#0d1f38` for alternating sections, Illini Orange `#FF5F05` for all accents/links. White/light-grey body text.
+- **Layout reference:** `amierulhakeem.dev` — sticky nav, full-viewport hero, full-width alternating feature blocks. Colors and code are original.
+- **Structure:**
+  - Sticky nav: "Charles Lin" logo left, About / Projects / Résumé button right
+  - Hero: eyebrow label, large name, tagline, two CTA buttons (View Projects + Download Résumé)
+  - About Me section (placeholder text — needs real copy)
+  - Engineering Projects: three alternating image/text blocks
+    1. BSPD (image left)
+    2. Embedded Systems Project — Line-Following Buggy (image right)
+    3. Dual Gas-Sensing Platform for Peatland GHG Research (image left)
+  - Footer: GitHub / LinkedIn / email links
+- **Responsive:** single-column below 720 px; nav collapses to Résumé button only on mobile
+- **Images:** placeholder `<div>` boxes in each project block; real images go in `/assets/` — swap comments are in the HTML
 
-## Outstanding items (from handoff)
-1. **GitHub link** in `index.html` still reads `github.com/charlyeeyee` → change to `https://github.com/clin1146`
-2. **`www` TLS cert error** (`ERR_CERT_COMMON_NAME_INVALID`) — fix: Settings → Pages → delete custom domain → Save → re-enter `charleslin.dev` → Save. Wait 15–60 min. Not blocking (QR/links use apex domain).
-3. **Email link** — consider showing `charles@charleslin.dev` as link text instead of just "Email" (mailto: is silent on machines with no mail client)
-4. **Verify `resume.pdf`** uploaded and download button works (handoff noted `resume.pdf` but repo currently has `Charles_Lin_Resume.pdf` — confirm filename matches `index.html` link)
+## Tone
+Understated, technical, no marketing language. Written for engineers handed a physical card.
+
+## Files
+```
+CNAME                    one line: charleslin.dev  ← never touch
+index.html               the whole site, self-contained
+Charles_Lin_Resume.pdf   linked from nav and hero buttons
+.claude/CLAUDE.md        this file
+```
+Note: resume is `Charles_Lin_Resume.pdf` (not `resume.pdf`). Both nav and hero buttons already point to the correct filename.
 
 ## Email
 `charles@charleslin.dev` → `charlielin931114@gmail.com` (Porkbun forwarding)
+
+## GitHub account
+Renamed `Charlyeeyee` → `clin1146`. Apex domain unaffected. GitHub link in index.html is already `github.com/clin1146`.
 
 ## Project background
 PCB business card: playable 2-player Connect 4, 85×55 mm.
@@ -39,7 +59,23 @@ PCB business card: playable 2-player Connect 4, 85×55 mm.
 - 4-layer, black soldermask, ENIG gold, epoxy vias
 - Bare-metal C firmware, no HAL, direct register access
 
-**Attribution:** design referenced from Amierul Hakeem (`amierulhakeem.dev`), permission to publish obtained. Credit on site.
+**Attribution:** design referenced from Amierul Hakeem (`amierulhakeem.dev`), permission to publish obtained. Needs a credit on the site (not yet added).
 
-## GitHub account
-Renamed `Charlyeeyee` → `clin1146`. Apex domain unaffected (A records). www CNAME already updated.
+---
+
+## TODO
+
+### Content (placeholders to fill)
+- [ ] **About Me** — write real first-person bio (short, technical, understated)
+- [ ] **BSPD** — one-line description + project image → `/assets/bspd.jpg`
+- [ ] **Line-Following Buggy** — one-line description + project image → `/assets/buggy.jpg`
+- [ ] **Gas-Sensing Platform** — one-line description + project image → `/assets/gas-sensor.jpg`
+- [ ] **"Read More" links** — currently `href="#"`; wire up to actual project pages or anchors
+- [ ] **Amierul Hakeem attribution** — add credit somewhere on the site (footer or about section)
+
+### Infrastructure
+- [ ] **`www` TLS cert error** (`ERR_CERT_COMMON_NAME_INVALID`) — re-issue by: Settings → Pages → delete custom domain → Save → re-enter `charleslin.dev` → Save. Wait 15–60 min. Not blocking (QR/links use apex domain).
+
+### Nice to have
+- [ ] Individual project detail pages (or expanded sections) once content is ready
+- [ ] Hero tagline — currently generic; could be more specific once project context is clearer
