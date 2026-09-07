@@ -209,6 +209,16 @@
       display: block;
     }
 
+    /* Portrait render — frame ratio matched to the rotated image to avoid cropping */
+    .overview-img--portrait {
+      aspect-ratio: 5 / 8;
+    }
+
+    .overview-img--portrait img {
+      object-fit: contain;
+      background: #eef0f2;
+    }
+
     .overview-text .about-body { max-width: none; }
 
     .btn {
@@ -308,6 +318,9 @@
 
   <!-- ── PROJECT HERO ────────────────────────────────────── -->
   <section class="hero">
+    <video class="hero-video" autoplay muted loop playsinline poster="assets/gas-hero-poster.jpg">
+      <source src="assets/gas-hero.mp4" type="video/mp4">
+    </video>
     <div class="hero-overlay"></div>
     <div class="hero-inner">
       <a class="back-link" href="index.html">&larr; Back to Home</a>
@@ -319,8 +332,8 @@
   <!-- ── DESCRIPTION ─────────────────────────────────────── -->
   <section class="section">
     <div class="section-inner overview-grid">
-      <div class="overview-img">
-        <img src="assets/Main_page_IP.jpeg" alt="Dual gas-sensing platform PCB with mounted gas sensor module">
+      <div class="overview-img overview-img--portrait">
+        <img src="assets/gas-overview.jpg" alt="Render of the dual gas-sensing platform PCB">
       </div>
       <div class="overview-text">
         <p class="section-label">Overview</p>

@@ -94,7 +94,7 @@
       overflow: hidden;
     }
 
-    .hero-video {
+    .hero-video, .hero-img {
       position: absolute;
       inset: 0;
       width: 100%;
@@ -209,10 +209,9 @@
       display: block;
     }
 
-    /* BSPD render is wider than the 4:3 box — show it uncropped */
-    .overview-img--contain img {
-      object-fit: contain;
-      padding: 1rem;
+    /* Portrait photo — give the frame a taller aspect ratio */
+    .overview-img--portrait {
+      aspect-ratio: 3 / 4;
     }
 
     .overview-text .about-body { max-width: none; }
@@ -314,6 +313,7 @@
 
   <!-- ── PROJECT HERO ────────────────────────────────────── -->
   <section class="hero">
+    <img class="hero-img" src="assets/bspd-hero.jpg" alt="Charles and the University of Manchester Formula Student team with the car at Silverstone">
     <div class="hero-overlay"></div>
     <div class="hero-inner">
       <a class="back-link" href="index.html">&larr; Back to Home</a>
@@ -325,8 +325,8 @@
   <!-- ── DESCRIPTION ─────────────────────────────────────── -->
   <section class="section">
     <div class="section-inner overview-grid">
-      <div class="overview-img overview-img--contain">
-        <img src="assets/Main_page_BSPD.png" alt="Brake System Plausibility Device PCB for the University of Manchester Formula Student car">
+      <div class="overview-img overview-img--portrait">
+        <img src="assets/bspd-overview.jpg" alt="Charles seated in the University of Manchester Formula Student car in the workshop">
       </div>
       <div class="overview-text">
         <p class="section-label">Overview</p>

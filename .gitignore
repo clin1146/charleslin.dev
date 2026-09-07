@@ -1,10 +1,14 @@
 # Raw camera footage/photos — exceed GitHub's 100MB file limit (or just needlessly large).
-# Compressed/resized derivatives (assets/buggy-hero.mp4, assets/buggy-project-hero.mp4,
-# assets/buggy-team.jpg) are committed instead.
+# Compressed/resized derivatives (e.g. assets/buggy-hero.mp4, assets/gas-hero.mp4,
+# assets/bspd-hero.jpg) are committed instead.
 *.MP4
 *.MOV
 Buggy_finalrace_dim.MP4
-Readme_buggy1.MOV
-Readme_buggy2.JPEG
+Readmore_buggy1.MOV
+Readmore_buggy2.JPEG
+Readmore_BSPD1.JPEG
+Readmore_BSPD2.JPEG
+Readmore_IP2.png
 !assets/buggy-hero.mp4
 !assets/buggy-project-hero.mp4
+!assets/gas-hero.mp4
