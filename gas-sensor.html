@@ -92,18 +92,15 @@
       align-items: center;
       padding: 5rem 2rem 4rem;
       overflow: hidden;
-      background: var(--blue-dark);
     }
 
-    /* Portrait phone clip — show the whole setup, anchored to the right
-       so the headline stays clear on the left */
     .hero-video {
       position: absolute;
       inset: 0;
       width: 100%;
       height: 100%;
-      object-fit: contain;
-      object-position: right center;
+      object-fit: cover;
+      object-position: center;
       z-index: 0;
     }
 
@@ -199,7 +196,9 @@
     }
 
     .overview-img {
-      aspect-ratio: 4 / 3;
+      /* Landscape frame — ratio close to the native render so cover only
+         trims blank board margin, never components */
+      aspect-ratio: 16 / 10;
       background: var(--blue-mid);
       border: 1px solid var(--border);
       border-radius: 8px;
@@ -210,17 +209,8 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center;
       display: block;
-    }
-
-    /* Portrait render — frame ratio matched to the rotated image to avoid cropping */
-    .overview-img--portrait {
-      aspect-ratio: 5 / 8;
-    }
-
-    .overview-img--portrait img {
-      object-fit: contain;
-      background: #eef0f2;
     }
 
     .overview-text .about-body { max-width: none; }
@@ -336,7 +326,7 @@
   <!-- ── DESCRIPTION ─────────────────────────────────────── -->
   <section class="section">
     <div class="section-inner overview-grid">
-      <div class="overview-img overview-img--portrait">
+      <div class="overview-img">
         <img src="assets/gas-overview.jpg" alt="Render of the dual gas-sensing platform PCB">
       </div>
       <div class="overview-text">
