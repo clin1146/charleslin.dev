@@ -86,13 +86,37 @@
 
     /* ── HERO ────────────────────────────────────────────── */
     .hero {
+      position: relative;
       min-height: calc(100svh - 60px);
       display: flex;
       align-items: center;
       padding: 5rem 2rem 4rem;
+      overflow: hidden;
+    }
+
+    .hero-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(13,31,56,0.80) 0%, rgba(13,31,56,0.72) 45%, rgba(13,31,56,0.9) 100%);
+      z-index: 1;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-video { display: none; }
     }
 
     .hero-inner {
+      position: relative;
+      z-index: 2;
       max-width: 1100px;
       margin: 0 auto;
       width: 100%;
@@ -186,9 +210,11 @@
     .about-body {
       color: var(--muted);
       font-size: 1.05rem;
-      max-width: 60ch;
+      max-width: 50ch;
       line-height: 1.8;
     }
+
+    .about-body + .link-arrow { margin-top: 1.25rem; }
 
     /* ── PROJECTS — alternating feature blocks ───────────── */
     .projects-grid {
@@ -231,6 +257,12 @@
       object-fit: cover;
       border-radius: 8px;
       display: block;
+    }
+
+    /* BSPD render is wider than the 4:3 box — show it uncropped instead of cutting the sides */
+    .project-img--contain img {
+      object-fit: contain;
+      padding: 1rem;
     }
 
     .project-text { }
@@ -338,15 +370,19 @@
     <div class="nav-inner">
       <a class="nav-logo" href="#">Charles <span>Lin</span></a>
       <ul class="nav-links">
-        <li><a href="#about">About</a></li>
+        <li><a href="about.html">About</a></li>
         <li><a href="#projects">Projects</a></li>
-        <li><a class="nav-cta" href="Charles_Lin_Resume.pdf">Résumé</a></li>
+        <li><a class="nav-cta" href="Charles_Lin_Resume.pdf">Resume</a></li>
       </ul>
     </div>
   </header>
 
   <!-- ── HERO ────────────────────────────────────────────── -->
   <section class="hero">
+    <video class="hero-video" autoplay muted loop playsinline poster="assets/hero-poster.jpg">
+      <source src="assets/buggy-hero.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
     <div class="hero-inner">
       <span class="hero-eyebrow">Electronics &amp; Embedded Systems</span>
       <h1>Charles Lin</h1>
@@ -355,19 +391,20 @@
       </p>
       <div class="hero-actions">
         <a class="btn" href="#projects">View Projects</a>
-        <a class="btn btn-ghost" href="Charles_Lin_Resume.pdf">Download Résumé</a>
+        <a class="btn btn-ghost" href="Charles_Lin_Resume.pdf">Download Resume</a>
       </div>
     </div>
   </section>
 
-  <!-- ── ABOUT ME ─────────────────────────────────────────── -->
+  <!-- ── ABOUT ME (teaser — full bio lives on about.html) ─── -->
   <section class="section section-alt" id="about">
     <div class="section-inner">
       <p class="section-label">About</p>
       <h2 class="section-heading">About Me</h2>
       <p class="about-body">
-        [Placeholder — short, first-person bio. Keep it understated and technical.]
+        I'm an electronics and embedded systems engineer who likes building products that solve real problems for people.
       </p>
+      <a class="link-arrow" href="about.html">Read Full Bio</a>
     </div>
   </section>
 
@@ -381,9 +418,8 @@
 
         <!-- Project 1: BSPD — image left, text right -->
         <div class="project-block">
-          <div class="project-img" role="img" aria-label="BSPD — image placeholder">
-            [ img: bspd ]
-            <!-- swap for: <img src="/assets/bspd.jpg" alt="BSPD"> -->
+          <div class="project-img project-img--contain">
+            <img src="assets/Main_page_BSPD.png" alt="BSPD — Manchester Stinger Motorsports brake system plausibility device PCB">
           </div>
           <div class="project-text">
             <p class="project-tag">Hardware</p>
@@ -395,9 +431,8 @@
 
         <!-- Project 2: Line-Following Buggy — text left, image right -->
         <div class="project-block flip">
-          <div class="project-img" role="img" aria-label="Line-Following Buggy — image placeholder">
-            [ img: buggy ]
-            <!-- swap for: <img src="/assets/buggy.jpg" alt="Line-Following Buggy"> -->
+          <div class="project-img">
+            <img src="assets/Main_page_buggy.JPEG" alt="Line-following buggy — STM32-based two-wheeled robot">
           </div>
           <div class="project-text">
             <p class="project-tag">Embedded Systems</p>
@@ -409,9 +444,8 @@
 
         <!-- Project 3: Gas Sensor — image left, text right -->
         <div class="project-block">
-          <div class="project-img" role="img" aria-label="Gas-Sensing Platform — image placeholder">
-            [ img: gas-sensor ]
-            <!-- swap for: <img src="/assets/gas-sensor.jpg" alt="Gas-Sensing Platform"> -->
+          <div class="project-img">
+            <img src="assets/Main_page_IP.jpeg" alt="Dual gas-sensing platform PCB with mounted gas sensor module">
           </div>
           <div class="project-text">
             <p class="project-tag">Research</p>
@@ -431,7 +465,7 @@
       <ul class="footer-links">
         <li><a href="https://github.com/clin1146">GitHub</a></li>
         <li><a href="https://linkedin.com/in/charleslin04/">LinkedIn</a></li>
-        <li><a href="mailto:charles@charleslin.dev">charles@charleslin.dev</a></li>
+        <li><a href="mailto:clin1146@gmail.com">clin1146@gmail.com</a></li>
       </ul>
       <span class="footer-copy">charleslin.dev</span>
     </div>

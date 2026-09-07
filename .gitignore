@@ -1,0 +1,5 @@
+# Raw camera footage — exceeds GitHub's 100MB file limit.
+# The compressed hero-background derivative (assets/buggy-hero.mp4) is committed instead.
+*.MP4
+Buggy_finalrace_dim.MP4
+!assets/buggy-hero.mp4
