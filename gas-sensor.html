@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dual Gas-Sensing Platform — Charles Lin</title>
+  <meta name="description" content="Dual Gas-Sensing Platform — a low-cost CH4 and CO2 monitoring system for peatland greenhouse gas research.">
+  <style>
+    :root {
+      --blue:   #13294B;
+      --blue-dark: #0d1f38;
+      --blue-mid:  #1a3560;
+      --orange: #FF5F05;
+      --fg:     #f0f2f5;
+      --muted:  #8da0bc;
+      --border: rgba(255,95,5,0.15);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--blue);
+      color: var(--fg);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Helvetica, Arial, sans-serif;
+      line-height: 1.65;
+    }
+
+    /* ── NAV ─────────────────────────────────────────────── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(13, 31, 56, 0.92);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--fg);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+    }
+
+    .nav-logo span { color: var(--orange); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.88rem;
+      letter-spacing: 0.01em;
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--fg); }
+
+    .nav-links .nav-cta {
+      background: var(--orange);
+      color: #fff;
+      font-weight: 600;
+      padding: 0.45rem 1.1rem;
+      border-radius: 5px;
+      transition: opacity 0.15s;
+    }
+    .nav-links .nav-cta:hover { color: #fff; opacity: 0.85; }
+
+    /* ── PROJECT HERO ────────────────────────────────────── */
+    .hero {
+      position: relative;
+      min-height: calc(100svh - 60px);
+      display: flex;
+      align-items: center;
+      padding: 5rem 2rem 4rem;
+      overflow: hidden;
+    }
+
+    .hero-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(13,31,56,0.80) 0%, rgba(13,31,56,0.72) 45%, rgba(13,31,56,0.9) 100%);
+      z-index: 1;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-video { display: none; }
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      margin-bottom: 1.5rem;
+      transition: color 0.15s;
+    }
+    .back-link:hover { color: var(--fg); }
+
+    .hero-eyebrow {
+      display: inline-block;
+      color: var(--orange);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.8rem, 7vw, 5rem);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+    }
+
+    /* ── SECTION COMMON ──────────────────────────────────── */
+    .section {
+      padding: 6rem 2rem;
+    }
+
+    .section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      color: var(--orange);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+
+    .section-heading {
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 700;
+      letter-spacing: -0.015em;
+      margin-bottom: 2.5rem;
+    }
+
+    .about-body {
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 68ch;
+      line-height: 1.8;
+    }
+
+    /* ── OVERVIEW — photo left, copy right ───────────────── */
+    .overview-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .overview-img {
+      aspect-ratio: 4 / 3;
+      background: var(--blue-mid);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .overview-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .overview-text .about-body { max-width: none; }
+
+    .btn {
+      display: inline-block;
+      background: var(--orange);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.93rem;
+      padding: 0.75rem 1.75rem;
+      border-radius: 6px;
+      transition: opacity 0.15s;
+    }
+    .btn:hover { opacity: 0.85; }
+
+    .repo-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      margin-top: 1.5rem;
+      color: var(--orange);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.88rem;
+      transition: gap 0.15s;
+    }
+    .repo-link:hover { gap: 0.6rem; }
+    .repo-link::after { content: "→"; }
+
+    /* ── FOOTER ──────────────────────────────────────────── */
+    footer {
+      background: var(--blue-dark);
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 2rem;
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.75rem;
+      list-style: none;
+    }
+
+    .footer-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.88rem;
+      transition: color 0.15s;
+    }
+    .footer-links a:hover { color: var(--orange); }
+
+    .footer-copy {
+      color: #3a5070;
+      font-size: 0.78rem;
+    }
+
+    /* ── RESPONSIVE ──────────────────────────────────────── */
+    @media (max-width: 720px) {
+      .nav-inner { padding: 0 1.25rem; }
+
+      .nav-links { gap: 1.25rem; }
+      .nav-links li:not(:last-child) a { display: none; }
+
+      .hero { padding: 3.5rem 1.25rem 3rem; }
+      .section { padding: 4rem 1.25rem; }
+
+      .overview-grid { grid-template-columns: 1fr; gap: 1.75rem; }
+
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+      footer { padding: 2rem 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAV ─────────────────────────────────────────────── -->
+  <header class="nav">
+    <div class="nav-inner">
+      <a class="nav-logo" href="index.html">Charles <span>Lin</span></a>
+      <ul class="nav-links">
+        <li><a href="about.html">About</a></li>
+        <li><a href="index.html#projects">Projects</a></li>
+        <li><a class="nav-cta" href="Charles_Lin_Resume.pdf">Resume</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- ── PROJECT HERO ────────────────────────────────────── -->
+  <section class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-inner">
+      <a class="back-link" href="index.html">&larr; Back to Home</a>
+      <span class="hero-eyebrow">Research</span>
+      <h1>Dual Gas-Sensing Platform for Peatland GHG Research</h1>
+    </div>
+  </section>
+
+  <!-- ── DESCRIPTION ─────────────────────────────────────── -->
+  <section class="section">
+    <div class="section-inner overview-grid">
+      <div class="overview-img">
+        <img src="assets/Main_page_IP.jpeg" alt="Dual gas-sensing platform PCB with mounted gas sensor module">
+      </div>
+      <div class="overview-text">
+        <p class="section-label">Overview</p>
+        <p class="about-body">
+          Designed and built a low-cost dual-gas sensing platform for peatland greenhouse gas research, developing a custom NDIR methane sensor PCB and calibration workflow and integrating it with an existing CO&#8322; platform to enable time-stamped CH&#8324; and CO&#8322; monitoring.
+        </p>
+        <p class="about-body" style="margin-top: 1.25rem;">
+          For my final-year individual project, I designed and built a low-cost methane sensing platform based on the SGX IR12GJ NDIR sensor, aimed at making distributed greenhouse gas monitoring of peatland restoration sites more affordable. The work spanned custom PCB design with 4&nbsp;Hz lamp drive and band-pass signal conditioning, embedded firmware, and two-stage calibration against a commercial gas analyser, before integrating the sensor with an existing CO&#8322; platform to form a complete time-stamped dual-gas monitoring system.
+        </p>
+        <a class="repo-link" href="https://github.com/clin1146/IR12GJ-methane-dual-gas-platform">View on GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ──────────────────────────────────────────── -->
+  <footer>
+    <div class="footer-inner">
+      <ul class="footer-links">
+        <li><a href="https://github.com/clin1146">GitHub</a></li>
+        <li><a href="https://linkedin.com/in/charleslin04/">LinkedIn</a></li>
+        <li><a href="mailto:clin1146@gmail.com">clin1146@gmail.com</a></li>
+      </ul>
+      <span class="footer-copy">charleslin.dev</span>
+    </div>
+  </footer>
+
+</body>
+</html>
